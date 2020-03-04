@@ -4,12 +4,87 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const managerArray = [];
+const employeeArray = [];
+const engineerArray = [];
+const internArray = [];
+let id = 0;
+let exit = false;
+const filename = 'index.html';
+
 ​
 const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-​
 const render = require("./lib/htmlRenderer");
 ​
+​//Initial Question function to choose what Role for employee
+const questionsInit = [{
+    type: "list",
+    message: "Insert team member role you wish to add:",
+    name: "role",
+    choices: ["Manager", "Employee", "Engineer", "Intern", "Exit"]
+}];
+
+//Base questions that can fit in to every role. Name and Email
+const baseQuestions = [{
+    type: "input",
+    message: "Insert team member's name:",
+    name: "name",
+    validate: function validateName(name) {
+      return name !== '';
+    }
+  },{
+    type: "input",
+    message: "Insert team member's email:",
+    name: "email",
+    validate: function validateName(name) {
+      return name !== '';
+    }
+}];
+
+//Questions for manager Role
+const managerQuestions = [{
+    type: "input",
+    message: "Insert Managers office number:",
+    name: "officeNumber",
+    validate: function validateName(name) {
+      return name !== '';
+    }
+}];
+
+//Questions for engineer Role
+const engineerQuestions = [{
+    type: "input",
+    message: "Insert engineer's Github username:",
+    name: "username",
+    validate: function validate(name) {
+      return name !== '';
+    }
+}];
+
+//Questions for intern Role
+const internQuestions = [{
+    type: "input",
+    message: "Insert intern's school name:",
+    name: "school",
+    validate: function validateName(name) {
+      return name !== '';
+    }
+}];
+
+//Initiate the input collection
+const inputInit = async () => {
+    const { role, ...answers } = await inquirer.prompt(questionsInit);
+    return role;
+};
+
+
+
+
+
 ​
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
