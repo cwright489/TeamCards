@@ -81,6 +81,33 @@ const inputInit = async () => {
     return role;
 };
 
+//Collect the inputs with chosen role and adding them then asking the questions about email and office number
+const collectInputs = async (role) => {
+  id = id + 1
+  if (role === 'Manager') {
+      console.log(boxen(chalk.white.bold(`Adding a new ${role} team member.`), { padding: 1, margin: 1, borderColor: 'blue', backgroundColor: 'blue' }))
+      const questions = [...baseQuestions, ...managerQuestion];
+      member = await inquirer.prompt(questions);
+      const memberObj = new Manager(member.name, id, member.email, member.officeNumber);
+      managerArray.push(memberObj);
+  } else if (role === 'Engineer') {
+      console.log(boxen(chalk.white.bold(`Adding a new ${role} team member.`), { padding: 1, margin: 1, borderColor: 'blue', backgroundColor: 'blue' }))
+      const questions = [...baseQuestions, ...engineerQuestion];
+      member = await inquirer.prompt(questions)
+      const memberObj = new Engineer(member.name, id, member.email, member.github);
+      engineerArray.push(memberObj);
+  } else if (role === 'Intern') {
+      console.log(boxen(chalk.white.bold(`Adding a new ${role} team member.`), { padding: 1, margin: 1, borderColor: 'blue', backgroundColor: 'blue' }))
+      const questions = [...baseQuestions, ...internQuestion]
+      member = await inquirer.prompt(questions)
+      const memberObj = new Intern(member.name, id, member.email, member.school);
+      internArray.push(memberObj);
+  } else {
+      console.log(boxen(chalk.black.bold(`Exiting the Add Member CLI`), { padding: 1, margin: 1, borderColor: 'yellow', backgroundColor: 'yellow' }))
+      return exit = true;
+  }
+}
+
 
 
 
