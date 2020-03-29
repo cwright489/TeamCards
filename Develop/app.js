@@ -8,7 +8,6 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const managerArray = [];
-const employeeArray = [];
 const engineerArray = [];
 const internArray = [];
 let id = 0;
@@ -17,7 +16,7 @@ const filename = 'index.html';
 
 ​
 const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "index.html");
 const render = require("./lib/htmlRenderer");
 ​
 ​//Initial Question function to choose what Role for employee
@@ -86,19 +85,19 @@ const collectInputs = async (role) => {
   id = id + 1
   if (role === 'Manager') {
       console.log(boxen(chalk.white.bold(`Adding a new ${role} team member.`), { padding: 1, margin: 1, borderColor: 'blue', backgroundColor: 'blue' }))
-      const questions = [...baseQuestions, ...managerQuestion];
+      const questions = [...baseQuestions, ...managerQuestions];
       member = await inquirer.prompt(questions);
       const memberObj = new Manager(member.name, id, member.email, member.officeNumber);
       managerArray.push(memberObj);
   } else if (role === 'Engineer') {
       console.log(boxen(chalk.white.bold(`Adding a new ${role} team member.`), { padding: 1, margin: 1, borderColor: 'blue', backgroundColor: 'blue' }))
-      const questions = [...baseQuestions, ...engineerQuestion];
+      const questions = [...baseQuestions, ...engineerQuestions];
       member = await inquirer.prompt(questions)
       const memberObj = new Engineer(member.name, id, member.email, member.github);
       engineerArray.push(memberObj);
   } else if (role === 'Intern') {
       console.log(boxen(chalk.white.bold(`Adding a new ${role} team member.`), { padding: 1, margin: 1, borderColor: 'blue', backgroundColor: 'blue' }))
-      const questions = [...baseQuestions, ...internQuestion]
+      const questions = [...baseQuestions, ...internQuestions]
       member = await inquirer.prompt(questions)
       const memberObj = new Intern(member.name, id, member.email, member.school);
       internArray.push(memberObj);
