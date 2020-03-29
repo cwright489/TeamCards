@@ -1,23 +1,22 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const inquirer = require("inquirer");
-const path = require("path");
-const fs = require("fs");
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const inquirer = require('inquirer');
+const chalk = require('chalk');
+const boxen = require('boxen')
+const fs = require('fs')
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const generateHtml = require('./lib/generateHtml')
 const managerArray = [];
 const engineerArray = [];
 const internArray = [];
 let id = 0;
 let exit = false;
-const filename = 'index.html';
+const filename = 'team.html'
 
 ​
 const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "index.html");
-const render = require("./lib/htmlRenderer");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+const render = require("./lib/htmlRender");
 ​
 ​//Initial Question function to choose what Role for employee
 const questionsInit = [{
