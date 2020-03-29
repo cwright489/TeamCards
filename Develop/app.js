@@ -108,6 +108,25 @@ const collectInputs = async (role) => {
   }
 }
 
+//write to the HTML with the writefile function
+const writeHtml = (filename, data) => {
+  fs.writeFile(filename, data, function (err) {
+      if (err) console.log(err);
+      console.log("File written successfully.");
+  });
+};
+
+//initiate the whole app.js
+const init = async () => {
+  while (!exit) {
+      const role = await inputStart();
+      await collectInputs(role);
+  }
+  const html = await generateHtml(managerArray, engineerArray, internArray);
+  writeHtml(filename, html);
+}
+
+init();
 
 
 
